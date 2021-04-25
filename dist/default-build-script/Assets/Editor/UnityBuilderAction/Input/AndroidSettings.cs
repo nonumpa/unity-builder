@@ -8,6 +8,8 @@ namespace UnityBuilderAction.Input
     public static void Apply(Dictionary<string, string> options)
     {
       EditorUserBuildSettings.buildAppBundle = options["customBuildPath"].EndsWith(".aab");
+      if (bool.TryParse(options["exportAsGoogleAndroidProject"], out bool exportAsGoogleAndroidProject))
+        EditorUserBuildSettings.exportAsGoogleAndroidProject = exportAsGoogleAndroidProject;
       if (options.TryGetValue("androidKeystoreName", out string keystoreName) && !string.IsNullOrEmpty(keystoreName))
         PlayerSettings.Android.keystoreName = keystoreName;
       if (options.TryGetValue("androidKeystorePass", out string keystorePass) && !string.IsNullOrEmpty(keystorePass))
