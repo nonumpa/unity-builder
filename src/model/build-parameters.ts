@@ -6,7 +6,7 @@ import Versioning from './versioning';
 
 class BuildParameters {
   static async create() {
-    const buildFile = this.parseBuildFile(Input.buildName, Input.targetPlatform, Input.androidAppBundle);
+    const buildFile = this.parseBuildFile(Input.buildName, Input.targetPlatform, Input.androidAppBundle, Input.exportAsGoogleAndroidProject);
 
     const unityVersion = UnityVersioning.determineUnityVersion(Input.projectPath, Input.unityVersion);
 
@@ -41,15 +41,16 @@ class BuildParameters {
       remoteBuildCpu: Input.remoteBuildCpu,
       kubeVolumeSize: Input.kubeVolumeSize,
       kubeVolume: Input.kubeVolume,
+      exportAsGoogleAndroidProject: Input.exportAsGoogleAndroidProject,
     };
   }
 
-  static parseBuildFile(filename, platform, androidAppBundle) {
+  static parseBuildFile(filename, platform, androidAppBundle, exportAsGoogleAndroidProject) {
     if (Platform.isWindows(platform)) {
       return `${filename}.exe`;
     }
 
-    if (Platform.isAndroid(platform)) {
+    if (Platform.isAndroid(platform) && !exportAsGoogleAndroidProject) {
       return androidAppBundle ? `${filename}.aab` : `${filename}.apk`;
     }
 

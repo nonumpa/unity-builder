@@ -116,6 +116,12 @@ class Input {
   static get kubeVolume() {
     return core.getInput('kubeVolume') || '';
   }
+
+  static get exportAsGoogleAndroidProject() {
+    const input = core.getInput('exportAsGoogleAndroidProject') || false;
+
+    return input === 'true';
+  }
 }
 
 export default Input;

@@ -35,6 +35,7 @@ class Docker {
       androidKeystorePass,
       androidKeyaliasName,
       androidKeyaliasPass,
+      exportAsGoogleAndroidProject,
       customParameters,
     } = parameters;
 
@@ -61,6 +62,7 @@ class Docker {
         --env ANDROID_KEYSTORE_PASS="${androidKeystorePass}" \
         --env ANDROID_KEYALIAS_NAME="${androidKeyaliasName}" \
         --env ANDROID_KEYALIAS_PASS="${androidKeyaliasPass}" \
+        --env EXPORT_AS_GOOGLE_ANDROID_PROJECT="${exportAsGoogleAndroidProject}" \
         --env CUSTOM_PARAMETERS="${customParameters}" \
         --env GITHUB_REF \
         --env GITHUB_SHA \
