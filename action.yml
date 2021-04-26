@@ -98,6 +98,10 @@ inputs:
     required: false
     default: ''
     description: 'The android keyaliasPass'
+  exportAsGoogleAndroidProject:
+    required: false
+    default: 'false'
+    description: 'Whether to export GoogleAndroidProject'
   customParameters:
     required: false
     default: ''
