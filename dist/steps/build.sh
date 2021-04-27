@@ -22,7 +22,8 @@ echo "Using build target \"$BUILD_TARGET\"."
 #
 # Display build path and file
 #
-
+ANDROID_HOME=/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK
+echo "Android SDK HOME: \"$ANDROID_HOME\"."
 echo "Using build path \"$BUILD_PATH\" to save file \"$BUILD_FILE\"."
 BUILD_PATH_FULL="$GITHUB_WORKSPACE/$BUILD_PATH"
 CUSTOM_BUILD_PATH="$BUILD_PATH_FULL/$BUILD_FILE"
@@ -70,6 +71,23 @@ if [[ -z $ANDROID_KEYSTORE_NAME || -z $ANDROID_KEYSTORE_BASE64 ]]; then
 else
   echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$UNITY_PROJECT_PATH/$ANDROID_KEYSTORE_NAME"
   echo "Created Android keystore."
+fi
+
+#
+# Update Android SDK
+#
+if [[ "$BUILD_TARGET" == "Android" ]]; then
+  echo "Android SDK HOME: \"$ANDROID_HOME\"."
+  # $ANDROID_HOME/tools/bin/sdkmanager "platform-tools" "platforms;android-30"
+  # Install platform-tools, NDK 16.1.4479499 and build-tools 28.0.3
+  # yes | "$ANDROID_HOME/tools/bin/sdkmanager" \
+  #   "platform-tools" \
+  #   "build-tools;30.0.3" \
+  #   > /dev/null
+
+  # Accept licenses
+  yes | "$ANDROID_HOME/tools/bin/sdkmanager" --licenses
+  # chmod +x $ADD_PERMISSIONS_PATH
 fi
 
 #
